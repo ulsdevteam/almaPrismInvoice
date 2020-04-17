@@ -39,7 +39,7 @@
 		<xsl:call-template name="fixlenstring">
 			<xsl:with-param name="pLength">15</xsl:with-param>
 			<xsl:with-param name="pString">
-				<xsl:value-of select="../../../../inv:vendor_additional_code" />
+				<xsl:value-of select="substring-after(../../../../inv:vendor_FinancialSys_Code, '|')" />
 			</xsl:with-param>
 		</xsl:call-template>
 		<!-- 23, Filler -->
