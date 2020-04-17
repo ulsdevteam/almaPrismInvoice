@@ -105,11 +105,15 @@
 		<!-- 162, Filler -->
 		<xsl:text> </xsl:text>
 		<!-- 163 - 187, Source -->
-		<!-- TODO: Convert Ledger Name into "ULS Library", "HSLS Library", "Law Library" -->
 		<xsl:call-template name="fixlenstring">
 			<xsl:with-param name="pLength">32</xsl:with-param>
 			<xsl:with-param name="pString">
-				<xsl:value-of select="inv:ledger_name" />
+				<xsl:choose>
+					<xsl:when test="substring(inv:ledger_name, 1, 3) = 'uls'">ULS Library</xsl:when>
+					<xsl:when test="substring(inv:ledger_name, 1, 3) = 'Law'">Law Library</xsl:when>
+					<xsl:when test="substring(inv:ledger_name, 1, 4) = 'HSLS'">HSLS Library</xsl:when>
+					<xsl:otherwise></xsl:otherwise>
+				</xsl:choose>
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:text>&#xd;&#xa;</xsl:text>
