@@ -126,7 +126,7 @@
 <xsl:template name="fixlenstring">
 	<xsl:param name="pLength" />
 	<xsl:param name="pString" />
-	<xsl:variable name="whitespace255"><xsl:text>																																</xsl:text></xsl:variable>
+	<xsl:variable name="whitespace255"><xsl:text>                                                                                                                                                                                                                                                               </xsl:text></xsl:variable> 
 	<xsl:value-of select="substring($pString, 1, $pLength)" />
 	<xsl:if test="string-length($pString) &lt; $pLength">
 		<xsl:value-of select="substring($whitespace255, 1, $pLength - string-length($pString))" />
@@ -138,7 +138,7 @@
 -->
 <xsl:template name="formatAmount">
 	<xsl:param name="pAmount" />
-	<xsl:variable name="whitespace12"><xsl:text>	    </xsl:text></xsl:variable>
+	<xsl:variable name="whitespace12"><xsl:text>            </xsl:text></xsl:variable>
 	<xsl:variable name="len">12</xsl:variable>
 	<xsl:variable name="amt"><xsl:value-of select="format-number($pAmount, '#########0.00;-########0.00')" /></xsl:variable>
 	<xsl:if test="string-length($amt) &lt; $len">
