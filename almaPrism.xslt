@@ -75,9 +75,9 @@
 			<xsl:with-param name="pString">
 				<xsl:choose>
 					<!-- TODO: MISC (Processing?), TAX (?) -->
-					<xsl:when test="../../inv:line-type[text() = 'SHIPMENT']">FREIGHT</xsl:when>
+					<xsl:when test="../../inv:line_type[text() = 'SHIPMENT']"><xsl:text>FREIGHT</xsl:text></xsl:when>
 					<!-- TODO: verify if this is a safe assumption, or if we should enumerate each inv:line-type -->
-					<xsl:otherwise>ITEM</xsl:otherwise>
+					<xsl:otherwise><xsl:text>ITEM</xsl:text></xsl:otherwise>
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:call-template>
