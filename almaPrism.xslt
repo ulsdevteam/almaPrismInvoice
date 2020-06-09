@@ -12,7 +12,8 @@
 -->
 <xsl:template match="/inv:payment_data/inv:invoice_list">
 	<xsl:for-each-group select="inv:invoice/inv:invoice_line_list/inv:invoice_line/inv:fund_info_list/inv:fund_info" group-by="substring(inv:ledger_name, 1, 3)">
-		<xsl:if test="'[LibraryName]' = substring(inv:ledger_name, 1, 3)">
+		<!-- Jitterbit will pass a variable $LibraryName, with values of "uls", "Law", or "HSL" -->
+		<xsl:if test="'[LibraryName]' = substring(inv:ledger_name, 1, 3) or '[LibraryName]' = concat('[Library', 'Name]')">
 			<!--
 				Header Line
 			-->
@@ -22,7 +23,7 @@
 			<xsl:text> </xsl:text>
 			<!-- 12 - 17, Count -->
 			<xsl:value-of select="count(current-group())" />
-			<!-- CRLF -->
+			<!-- LFs to be converted to CRLFs after the fact -->
 			<xsl:text>&#10;</xsl:text>
 			<!--
 				Detail line
@@ -76,9 +77,8 @@
 					<xsl:with-param name="pLength">25</xsl:with-param>
 					<xsl:with-param name="pString">
 						<xsl:choose>
-							<!-- TODO: MISC (Processing?), TAX (?) -->
+							<!-- Per FIS, everthing is FREIGHT or ITEM -->
 							<xsl:when test="../../inv:line_type[text() = 'SHIPMENT']"><xsl:text>FREIGHT</xsl:text></xsl:when>
-							<!-- TODO: verify if this is a safe assumption, or if we should enumerate each inv:line-type -->
 							<xsl:otherwise><xsl:text>ITEM</xsl:text></xsl:otherwise>
 						</xsl:choose>
 					</xsl:with-param>
@@ -86,7 +86,6 @@
 				<!-- 88, Filler -->
 				<xsl:text> </xsl:text>
 				<!-- 89 - 128, Description -->
-				<!-- TODO: was Voyager "vendor code" + " " + "voucher id", what should this be now? -->
 				<xsl:call-template name="fixlenstring">
 					<xsl:with-param name="pLength">32</xsl:with-param>
 					<xsl:with-param name="pString">
@@ -122,10 +121,6 @@
 			</xsl:for-each>
 		</xsl:if>
 	</xsl:for-each-group>
-	<!--
-		TODO: confirm there are no detail lines not at the level inv:invoice/inv:invoice_line_list/inv:invoice_line/inv:fund_info_list/inv:fund_info
-		E.g. inv:invoice/inv:vat_info
-	-->
 </xsl:template>
 
 <!--
