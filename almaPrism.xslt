@@ -12,15 +12,7 @@
 -->
 <xsl:template match="/inv:payment_data/inv:invoice_list">
 	<xsl:for-each-group select="inv:invoice/inv:invoice_line_list/inv:invoice_line/inv:fund_info_list/inv:fund_info" group-by="substring(inv:ledger_name, 1, 3)">
-		<xsl:variable name="outputfile">
-			<xsl:text>prism-</xsl:text>
-			<xsl:choose>
-				<xsl:when test="substring-before(tokenize(base-uri(), '/')[last()], '.xml')"><xsl:value-of select="substring-before(tokenize(base-uri(), '/')[last()], '.xml')" /></xsl:when>
-				<xsl:otherwise><xsl:value-of select="format-dateTime(current-dateTime(), '[Y0001][M01][D01][h01][m01][s01]')"/></xsl:otherwise>
-			</xsl:choose>
-			<xsl:value-of select="concat('-', substring(inv:ledger_name, 1, 3))" />
-		</xsl:variable>
-		<xsl:result-document href="{$outputfile}">
+		<xsl:if test="'[LibraryName]' = substring(inv:ledger_name, 1, 3)">
 			<!--
 				Header Line
 			-->
@@ -31,7 +23,7 @@
 			<!-- 12 - 17, Count -->
 			<xsl:value-of select="count(current-group())" />
 			<!-- CRLF -->
-			<xsl:text>&#xd;&#xa;</xsl:text>
+			<xsl:text>&#10;</xsl:text>
 			<!--
 				Detail line
 			-->
@@ -126,9 +118,9 @@
 						</xsl:choose>
 					</xsl:with-param>
 				</xsl:call-template>
-				<xsl:text>&#xd;&#xa;</xsl:text>
+				<xsl:text>&#10;</xsl:text>
 			</xsl:for-each>
-		</xsl:result-document>
+		</xsl:if>
 	</xsl:for-each-group>
 	<!--
 		TODO: confirm there are no detail lines not at the level inv:invoice/inv:invoice_line_list/inv:invoice_line/inv:fund_info_list/inv:fund_info
