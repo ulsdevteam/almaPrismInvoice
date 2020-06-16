@@ -151,7 +151,7 @@
 </xsl:template>
 
 <!--
-  Give input of pMDY of the format MM-DD-YYYY or MM/DD/YYYY, output DD-MON-YYYY.
+  Give input of pMDY of the format MM-DD-YYYY or MM/DD/YYYY, output DD-MON-YY.
 -->
 <xsl:template name="formatDate">
 	<xsl:param name="pMDY" />
@@ -173,7 +173,7 @@
 		<xsl:otherwise><xsl:text>   </xsl:text></xsl:otherwise>
 	</xsl:choose>
 	<xsl:text>-</xsl:text>
-	<xsl:value-of select="substring($pMDY, 7, 4)" />
+	<xsl:value-of select="substring($pMDY, 9, 2)" />
 </xsl:template>
 
 </xsl:stylesheet>
