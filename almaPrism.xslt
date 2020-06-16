@@ -87,7 +87,7 @@
 				<xsl:text> </xsl:text>
 				<!-- 89 - 128, Description -->
 				<xsl:call-template name="fixlenstring">
-					<xsl:with-param name="pLength">32</xsl:with-param>
+					<xsl:with-param name="pLength">40</xsl:with-param>
 					<xsl:with-param name="pString">
 						<xsl:value-of select="../../../../inv:vendor_code" />
 						<xsl:text> </xsl:text>
@@ -107,7 +107,7 @@
 				<xsl:text> </xsl:text>
 				<!-- 163 - 187, Source -->
 				<xsl:call-template name="fixlenstring">
-					<xsl:with-param name="pLength">32</xsl:with-param>
+					<xsl:with-param name="pLength">25</xsl:with-param>
 					<xsl:with-param name="pString">
 						<xsl:choose>
 							<xsl:when test="substring(inv:ledger_name, 1, 3) = 'uls'">ULS Library</xsl:when>
