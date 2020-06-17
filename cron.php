@@ -21,10 +21,10 @@ $jobCall = $api->get("almaws/v1/conf/jobs/$jobId");
 if ($jobCall && $jobCall->info->http_code === 200) {
 	$job = json_decode($jobCall->response);
 	if (!$job) {
-		throw new Exception('Job '.$job.' had no content');
+		throw new Exception('Job '.$jobId.' had no content');
 	}
 } else if ($jobCall) {
-	throw new Exception('GET for job '.$job.' returned '.$jobCall->info->http_code);
+	throw new Exception('GET for job '.$jobId.' returned '.$jobCall->info->http_code);
 } else {
 	throw new Exception('GET API call construction failed');
 }
@@ -35,10 +35,10 @@ if ($jobCall && $jobCall->info->http_code === 201) {
 	$instance = json_decode($jobCall->response);
 	// TODO: check instance for possible error codes
 	if ($instance) {
-		print $instance;
+		print json_encode($instance);
 	}
 } else if ($jobCall) {
-	throw new Exception('POST for job '.$job.' returned '.$jobCall->info->http_code);
+	throw new Exception('POST for job '.$jobId.' returned '.$jobCall->info->http_code);
 } else {
 	throw new Exception('GET API call construction failed');
 }
