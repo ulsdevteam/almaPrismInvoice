@@ -112,7 +112,7 @@
 						<xsl:choose>
 							<xsl:when test="substring(inv:ledger_name, 1, 3) = 'uls'">ULS Library</xsl:when>
 							<xsl:when test="substring(inv:ledger_name, 1, 3) = 'Law'">Law Library</xsl:when>
-							<xsl:when test="substring(inv:ledger_name, 1, 4) = 'HSLS'">HSLS Library</xsl:when>
+							<xsl:when test="substring(inv:ledger_name, 1, 4) = 'HSLS'">Falk Library</xsl:when>
 							<xsl:otherwise></xsl:otherwise>
 						</xsl:choose>
 					</xsl:with-param>
