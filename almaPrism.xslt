@@ -67,7 +67,7 @@
 				<!-- 50 - 61, Amount -->
 				<xsl:call-template name="formatAmount">
 					<xsl:with-param name="pAmount">
-						<xsl:value-of select="../../inv:total_price" />
+						<xsl:value-of select="inv:local_amount/inv:sum" />
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- 62, Filler -->
